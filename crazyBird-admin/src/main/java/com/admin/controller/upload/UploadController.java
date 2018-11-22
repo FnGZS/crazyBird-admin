@@ -41,7 +41,6 @@ public class UploadController {
 	@ResponseBody
 	public MultiPicUploadModel doUploadPic(HttpServletRequest request, UploadPicParam uploadParam,
 			@RequestParam(value = "files", required = false) MultipartFile[] files) throws UploadException, IOException {
-		
 		return uploadProcess.doUploadPic(files, uploadParam);
 	}
 }
