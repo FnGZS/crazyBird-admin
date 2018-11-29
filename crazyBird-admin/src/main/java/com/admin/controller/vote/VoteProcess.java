@@ -29,6 +29,8 @@ import com.admin.controller.vote.param.VoteActionGetDetailParam;
 import com.admin.controller.vote.param.VoteActionParam;
 import com.admin.controller.vote.param.VoteActionStatusParam;
 import com.admin.controller.vote.param.VoteDetailByIdParam;
+import com.admin.controller.vote.param.VoteListOffLineItem;
+import com.admin.controller.vote.param.VoteListOffLineParam;
 import com.admin.controller.vote.param.VoteActionRecordParam;
 import com.admin.controller.vote.param.VoteActionSearchDetailParam;
 import com.admin.controller.vote.param.VoteActionSlideParam;
@@ -51,13 +53,14 @@ import com.admin.utils.PageUtils;
 import com.admin.controller.vote.model.VoteActionSlideItem;
 import com.admin.controller.vote.model.VoteActionSlideModel;
 import com.admin.dao.vote.dataobject.VoteActionSlideDO;
+import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 
 @Component
 public class VoteProcess {
 	@Autowired
 	private VoteService voteService;
 	
-	public SimpleFlagModel updateCode(String param) {
+	public SimpleFlagModel checkCode(String param) {
 		SimpleFlagModel model = new SimpleFlagModel();
 		Integer count = voteService.checkCodeIsNull(param);
 		if(count==0) {
@@ -72,6 +75,11 @@ public class VoteProcess {
 			model.setMessage("已被使用");
 			return model;	
 		}
+		return model;
+	}
+	
+	public SimpleFlagModel updateCode(String param) {
+		SimpleFlagModel model = new SimpleFlagModel();
 		int flag= voteService.updateCode(param);
 		if (flag<=0) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
@@ -80,7 +88,20 @@ public class VoteProcess {
 		}
 		return model;
 	}
-	
+	public SimpleFlagModel createVote(Long[] param) {
+		SimpleFlagModel model = new SimpleFlagModel();
+		List<Long> ids = new ArrayList<>();
+		for(int i=0;i<param.length;i++) {
+			ids.add(param[i]);
+		}
+		int flag = voteService.createVote(ids);
+		if(flag<=0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("投票失败");
+			return model;
+		}
+		return model;	
+	}
 	public SimpleFlagModel insertCode(String[] param) {
 		SimpleFlagModel model = new SimpleFlagModel();
 		 voteService.deleteCode();

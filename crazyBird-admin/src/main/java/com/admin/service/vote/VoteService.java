@@ -14,6 +14,7 @@ import com.admin.dao.vote.dataobject.VoteRecordDO;
 import com.admin.service.base.ResponseDO;
 import com.admin.service.base.ResponsePageQueryDO;
 import com.admin.dao.vote.dataobject.VoteActionSlideDO;
+import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 
 public interface VoteService {
 	ResponsePageQueryDO<List<VoteActionDO>> getVoteActionList(VoteActionPO po);
@@ -53,6 +54,8 @@ public interface VoteService {
 	int updateCode(String code);
 	
 	Integer checkCodeIsNull(String code);
+	
+	int createVote(List<Long> ids);
 	
 	
 }

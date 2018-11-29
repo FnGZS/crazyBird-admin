@@ -276,4 +276,15 @@
 	<delete  id ="deleteVoteActionSlide" parameterType="java.lang.Integer" >
 	delete from vote_slide where id =#{id,jdbcType=INTEGER}
 	</delete>
+	<update id="createVote"
+		parameterType="ArrayList">
+			update vote_offline
+			<set>
+				num=num+1
+			</set>
+			where id in
+			<foreach collection="list" item="id" index="index" open="(" close=")" separator=","> 
+			#{id,jdbcType=BIGINT} 
+		</foreach>
+	</update>
 </mapper>

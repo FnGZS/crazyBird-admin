@@ -17,6 +17,7 @@ import com.admin.dao.vote.dataobject.VoteActionPO;
 import com.admin.dao.vote.dataobject.VoteActionRecordDTO;
 import com.admin.dao.vote.dataobject.VoteActionRecordPO;
 import com.admin.dao.vote.dataobject.VoteActionSlideDO;
+import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 import com.admin.dao.vote.dataobject.VoteRecordDO;
 import com.admin.service.base.ResponseCode;
 import com.admin.service.base.ResponseDO;
@@ -175,5 +176,10 @@ public class VoteImpl implements VoteService {
 	public Integer checkCodeIsNull(String code) {
 		// TODO Auto-generated method stub
 		return voteDao.checkCodeIsNull(code);
+	}
+	@Override
+	public int createVote(List<Long> ids) {
+		// TODO Auto-generated method stub
+		return voteDao.createVote(ids);
 	}
 }

@@ -1,6 +1,8 @@
 package com.admin.controller.vote;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import com.admin.controller.vote.param.VoteActionDetailParam;
 import com.admin.controller.vote.param.VoteActionParam;
 import com.admin.controller.vote.param.VoteActionStatusParam;
 import com.admin.controller.vote.param.VoteDetailByIdParam;
+import com.admin.controller.vote.param.VoteListOffLineParam;
 import com.admin.controller.vote.param.VoteRecordParam;
 import com.admin.controller.vote.model.VoteActionSlideModel;
 import com.admin.controller.vote.param.VoteActionRecordParam;
@@ -193,6 +196,15 @@ public class VoteController {
 	public SimpleFlagModel deleteVoteActionSlide(@PathVariable Integer id) {
 		return voteProcess.deleteVoteActionSlide(id);	
 	}
+	
+	/**
+	 * 投票
+	 */
+	@RequestMapping(value = "/createCode",method = RequestMethod.POST)
+	@ResponseBody
+	public SimpleFlagModel createVote(@RequestBody Long[] param) {
+		return voteProcess.createVote(param);	
+	}
 	/**
 	 * 插入二维码
 	 */
@@ -202,11 +214,19 @@ public class VoteController {
 		return voteProcess.insertCode(param);	
 	}
 	/**
+	 * 检查二维码状态
+	 */
+	@RequestMapping(value = "/updateCode",method = RequestMethod.GET)
+	@ResponseBody
+	public SimpleFlagModel checkCode(String param) {
+		return voteProcess.checkCode(param);	
+	}
+	/**
 	 * 更新二维码状态
 	 */
-	@RequestMapping(value = "/updateCode",method = RequestMethod.PUT)
+	@RequestMapping(value = "/checkCode",method = RequestMethod.PUT)
 	@ResponseBody
-	public SimpleFlagModel insertCode(String param) {
+	public SimpleFlagModel updateCode(String param) {
 		return voteProcess.updateCode(param);	
 	}
 	

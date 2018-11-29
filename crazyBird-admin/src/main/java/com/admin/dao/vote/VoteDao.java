@@ -2,12 +2,15 @@ package com.admin.dao.vote;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.admin.dao.vote.dataobject.VoteActionDO;
 import com.admin.dao.vote.dataobject.VoteActionDetailDO;
 import com.admin.dao.vote.dataobject.VoteActionHotDTO;
 import com.admin.dao.vote.dataobject.VoteActionPO;
 import com.admin.dao.vote.dataobject.VoteRecordDO;
 import com.admin.dao.vote.dataobject.VoteActionSlideDO;
+import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 
 public interface VoteDao {
 	//得到投票活动列表
@@ -54,6 +57,9 @@ public interface VoteDao {
 	Integer checkCode(String code);
 	
 	int checkCodeIsNull(String code);
+	
+	int createVote(@Param("list") List<Long> ids);
+	
 
 	
 }
