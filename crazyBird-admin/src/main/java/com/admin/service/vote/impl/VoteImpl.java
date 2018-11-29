@@ -154,4 +154,26 @@ public class VoteImpl implements VoteService {
 		// TODO Auto-generated method stub
 		return voteDao.deleteVoteActionSlide(id);
 	}
+	@Override
+	public int insertCode(String code) {	
+		return voteDao.insertCode(code);
+	}
+	@Override
+	public int deleteCode() {
+		return voteDao.deleteCode();
+	}
+	@Override
+	public int updateCode(String code) {
+		return voteDao.updateCode(code);
+	}
+	@Override
+	public Integer checkCode(String code) {
+		
+		return voteDao.checkCode(code);
+	}
+	@Override
+	public Integer checkCodeIsNull(String code) {
+		// TODO Auto-generated method stub
+		return voteDao.checkCodeIsNull(code);
+	}
 }

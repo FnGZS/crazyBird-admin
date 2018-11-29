@@ -56,7 +56,51 @@ import com.admin.dao.vote.dataobject.VoteActionSlideDO;
 public class VoteProcess {
 	@Autowired
 	private VoteService voteService;
-
+	
+	public SimpleFlagModel updateCode(String param) {
+		SimpleFlagModel model = new SimpleFlagModel();
+		Integer count = voteService.checkCodeIsNull(param);
+		if(count==0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("非法访问");
+			return model;	
+		}
+		Integer status = voteService.checkCode(param);
+		
+		if(status==1) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("已被使用");
+			return model;	
+		}
+		int flag= voteService.updateCode(param);
+		if (flag<=0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("更新失败");
+			return model;
+		}
+		return model;
+	}
+	
+	public SimpleFlagModel insertCode(String[] param) {
+		SimpleFlagModel model = new SimpleFlagModel();
+		int flag = voteService.deleteCode();
+		if(flag <= 0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("删除失败");
+			return model;
+		}
+		System.out.println(param.length);
+		for(int i = 0 ; i < param.length ; i++) {
+			flag = voteService.insertCode(param[i]);;
+			if(flag <= 0) {
+				model.setCode(HttpCodeEnum.ERROR.getCode());
+				model.setMessage("插入失败");
+				return model;
+			}	
+		}
+		return model;
+	}
+	
 	public VoteActionListModel getActionList(VoteActionStatusParam param) {
 		VoteActionListModel model = new VoteActionListModel();
 		PageUtils.resetPageParam(param);

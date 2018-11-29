@@ -106,6 +106,7 @@
 		where `status`= #{status,jdbcType=INTEGER}
 		</if>
 	</select>
+	
 	<select id="getVoteAction" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
@@ -124,6 +125,21 @@
 	<select id="getVoteActionSlide" resultMap="VoteActionSlideMap" >
 		select id,gmt_created,gmt_modified, action_id,picture from vote_slide 
 	</select>
+	<select id = "checkCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+	select is_use from code where `code`= #{code,jdbcType=VARCHAR}
+	</select>
+		<select id = "checkCodeIsNull" resultType="java.lang.Integer" parameterType="java.lang.String">
+	select count(1) from code where `code`= #{code,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteCode" >
+	delete from code
+	</delete>
+	<insert id="insertCode" parameterType="java.lang.String">
+	insert into code (`code`) VALUES (#{code,jdbcType=VARCHAR})
+	</insert>
+	<update id ="updateCode" parameterType="java.lang.String">
+		update code set is_use = 1 where `code`=#{code,jdbcType=VARCHAR}
+	</update>
 	<update id="updateVoteActionNum" parameterType="java.lang.Long">
 		update vote_action set visit_num=visit_num+1
 		where id = #{id,jdbcType=BIGINT}

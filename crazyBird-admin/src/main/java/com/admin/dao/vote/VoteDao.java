@@ -44,6 +44,16 @@ public interface VoteDao {
 	int addVoteActionSlide(VoteActionSlideDO slideDO);
 	
 	int deleteVoteActionSlide(Integer id);
+	
+	int insertCode(String code);
+	
+	int deleteCode();
+	
+	int updateCode(String code);
+	
+	Integer checkCode(String code);
+	
+	int checkCodeIsNull(String code);
 
 	
 }

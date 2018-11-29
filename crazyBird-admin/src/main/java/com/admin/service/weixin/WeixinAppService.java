@@ -60,9 +60,11 @@ public class WeixinAppService {
 				}
 				Map<String, Object> resultMap = JsonUtils.getMap4Json(sb.toString().trim());
 				String sessionkey = (String) resultMap.get("session_key");
+
 				if(StringUtils.isBlank(sessionkey)) {
 					result.setCode(ResponseCode.ERROR);
 					result.setMessage("微信小程序登录异常，code换取session_key失败");
+					
 					return result;
 				}
 				// STEP2 获取解密用户关键信息

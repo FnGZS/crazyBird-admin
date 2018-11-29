@@ -193,4 +193,21 @@ public class VoteController {
 	public SimpleFlagModel deleteVoteActionSlide(@PathVariable Integer id) {
 		return voteProcess.deleteVoteActionSlide(id);	
 	}
+	/**
+	 * 插入二维码
+	 */
+	@RequestMapping(value = "/insertCode",method = RequestMethod.POST)
+	@ResponseBody
+	public SimpleFlagModel insertCode(String[] param) {
+		return voteProcess.insertCode(param);	
+	}
+	/**
+	 * 更新二维码状态
+	 */
+	@RequestMapping(value = "/updateCode",method = RequestMethod.PUT)
+	@ResponseBody
+	public SimpleFlagModel insertCode(String param) {
+		return voteProcess.updateCode(param);	
+	}
+	
 }

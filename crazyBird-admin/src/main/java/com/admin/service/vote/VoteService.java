@@ -46,6 +46,13 @@ public interface VoteService {
 	
 	int deleteVoteActionSlide(Integer id);
 	
+	int deleteCode();
+	Integer checkCode(String code);
+	int insertCode(String code);
+	
+	int updateCode(String code);
+	
+	Integer checkCodeIsNull(String code);
 	
 	
 }
