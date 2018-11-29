@@ -83,15 +83,9 @@ public class VoteProcess {
 	
 	public SimpleFlagModel insertCode(String[] param) {
 		SimpleFlagModel model = new SimpleFlagModel();
-		int flag = voteService.deleteCode();
-		if(flag <= 0) {
-			model.setCode(HttpCodeEnum.ERROR.getCode());
-			model.setMessage("删除失败");
-			return model;
-		}
-		System.out.println(param.length);
+		 voteService.deleteCode();
 		for(int i = 0 ; i < param.length ; i++) {
-			flag = voteService.insertCode(param[i]);;
+			int flag = voteService.insertCode(param[i]);;
 			if(flag <= 0) {
 				model.setCode(HttpCodeEnum.ERROR.getCode());
 				model.setMessage("插入失败");
