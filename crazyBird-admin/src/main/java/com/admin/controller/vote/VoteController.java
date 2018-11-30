@@ -213,6 +213,16 @@ public class VoteController {
 	public SimpleFlagModel insertCode(String[] param) {
 		return voteProcess.insertCode(param);	
 	}
+	
+	/**
+	 * 插入二维码
+	 */
+	@RequestMapping(value = "/insertTeacherCode",method = RequestMethod.POST)
+	@ResponseBody
+	public SimpleFlagModel insertTeacherCode(String[] param) {
+		return voteProcess.insertTeacherCode(param);	
+	}
+	
 	/**
 	 * 检查二维码状态
 	 */

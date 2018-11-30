@@ -48,6 +48,7 @@ public interface VoteDao {
 	
 	int deleteVoteActionSlide(Integer id);
 	
+	
 	int insertCode(String code);
 	
 	int deleteCode();
@@ -57,6 +58,17 @@ public interface VoteDao {
 	Integer checkCode(String code);
 	
 	int checkCodeIsNull(String code);
+	
+	
+	int insertTeacherCode(String code);
+	
+	int deleteTeacherCode();
+	
+	int updateTeacherCode(String code);
+	
+	Integer checkTeacherCode(String code);
+	
+	int checkTeacherCodeIsNull(String code);
 	
 	int createVote(@Param("list") List<Long> ids);
 	

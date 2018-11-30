@@ -55,6 +55,14 @@ public interface VoteService {
 	
 	Integer checkCodeIsNull(String code);
 	
+	int deleteTeacherCode();
+	Integer checkTeacherCode(String code);
+	int insertTeacherCode(String code);
+	
+	int updateTeacherCode(String code);
+	
+	Integer checkTeacherCodeIsNull(String code);
+	
 	int createVote(List<Long> ids);
 	
 	

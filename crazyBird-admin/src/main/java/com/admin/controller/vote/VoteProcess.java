@@ -63,14 +63,25 @@ public class VoteProcess {
 	public SimpleFlagModel checkCode(String param) {
 		SimpleFlagModel model = new SimpleFlagModel();
 		Integer count = voteService.checkCodeIsNull(param);
+		Integer count2 = voteService.checkTeacherCodeIsNull(param);
 		if(count==0) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
 			model.setMessage("非法访问");
 			return model;	
 		}
+		if(count2==0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("非法访问");
+			return model;	
+		}
 		Integer status = voteService.checkCode(param);
-		
+		Integer status2 = voteService.checkTeacherCode(param);
 		if(status==1) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("已被使用");
+			return model;	
+		}
+		if(status2==1) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
 			model.setMessage("已被使用");
 			return model;	
@@ -80,6 +91,7 @@ public class VoteProcess {
 	
 	public SimpleFlagModel updateCode(String param) {
 		SimpleFlagModel model = new SimpleFlagModel();
+		voteService.updateTeacherCode(param);
 		int flag= voteService.updateCode(param);
 		if (flag<=0) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
@@ -105,6 +117,20 @@ public class VoteProcess {
 	public SimpleFlagModel insertCode(String[] param) {
 		SimpleFlagModel model = new SimpleFlagModel();
 		 voteService.deleteCode();
+		for(int i = 0 ; i < param.length ; i++) {
+			int flag = voteService.insertCode(param[i]);;
+			if(flag <= 0) {
+				model.setCode(HttpCodeEnum.ERROR.getCode());
+				model.setMessage("插入失败");
+				return model;
+			}	
+		}
+		return model;
+	}
+	
+	public SimpleFlagModel insertTeacherCode(String[] param) {
+		SimpleFlagModel model = new SimpleFlagModel();
+		 voteService.deleteTeacherCode();
 		for(int i = 0 ; i < param.length ; i++) {
 			int flag = voteService.insertCode(param[i]);;
 			if(flag <= 0) {

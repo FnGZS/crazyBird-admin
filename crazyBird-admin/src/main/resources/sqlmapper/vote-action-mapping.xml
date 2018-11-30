@@ -128,7 +128,7 @@
 	<select id = "checkCode" resultType="java.lang.Integer" parameterType="java.lang.String">
 	select is_use from code where `code`= #{code,jdbcType=VARCHAR}
 	</select>
-		<select id = "checkCodeIsNull" resultType="java.lang.Integer" parameterType="java.lang.String">
+	<select id = "checkCodeIsNull" resultType="java.lang.Integer" parameterType="java.lang.String">
 	select count(1) from code where `code`= #{code,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteCode" >
@@ -140,6 +140,24 @@
 	<update id ="updateCode" parameterType="java.lang.String">
 		update code set is_use = 1 where `code`=#{code,jdbcType=VARCHAR}
 	</update>
+	
+	
+	<select id = "checkTeacherCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+	select is_use from code_teacher where `code`= #{code,jdbcType=VARCHAR}
+	</select>
+	<select id = "checkTeacherCodeIsNull" resultType="java.lang.Integer" parameterType="java.lang.String">
+	select count(1) from code_teacher where `code`= #{code,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteTeacherCode" >
+	delete from code_teacher
+	</delete>
+	<insert id="insertTeacherCode" parameterType="java.lang.String">
+	insert into code_teacher (`code`) VALUES (#{code,jdbcType=VARCHAR})
+	</insert>
+	<update id ="updateTeacherCode" parameterType="java.lang.String">
+		update code_teacher set is_use = 1 where `code`=#{code,jdbcType=VARCHAR}
+	</update>
+	
 	<update id="updateVoteActionNum" parameterType="java.lang.Long">
 		update vote_action set visit_num=visit_num+1
 		where id = #{id,jdbcType=BIGINT}

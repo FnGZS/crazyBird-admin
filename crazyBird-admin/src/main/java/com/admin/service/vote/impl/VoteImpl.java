@@ -174,12 +174,35 @@ public class VoteImpl implements VoteService {
 	}
 	@Override
 	public Integer checkCodeIsNull(String code) {
-		// TODO Auto-generated method stub
+
 		return voteDao.checkCodeIsNull(code);
+	}
+	
+	@Override
+	public int insertTeacherCode(String code) {	
+		return voteDao.insertTeacherCode(code);
+	}
+	@Override
+	public int deleteTeacherCode() {
+		return voteDao.deleteTeacherCode();
+	}
+	@Override
+	public int updateTeacherCode(String code) {
+		return voteDao.updateTeacherCode(code);
+	}
+	@Override
+	public Integer checkTeacherCode(String code) {
+		
+		return voteDao.checkTeacherCode(code);
+	}
+	@Override
+	public Integer checkTeacherCodeIsNull(String code) {
+
+		return voteDao.checkTeacherCodeIsNull(code);
 	}
 	@Override
 	public int createVote(List<Long> ids) {
-		// TODO Auto-generated method stub
+
 		return voteDao.createVote(ids);
 	}
 }
