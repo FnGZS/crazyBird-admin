@@ -71,7 +71,7 @@ public interface VoteDao {
 	int checkTeacherCodeIsNull(String code);
 	
 	int createVote(@Param("list") List<Long> ids);
-	
+	List<VoteListOffLineDO> getSum();
 
 	
 }

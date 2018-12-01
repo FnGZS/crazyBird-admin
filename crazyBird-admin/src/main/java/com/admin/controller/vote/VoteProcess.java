@@ -52,6 +52,7 @@ import com.admin.utils.DateUtil;
 import com.admin.utils.PageUtils;
 import com.admin.controller.vote.model.VoteActionSlideItem;
 import com.admin.controller.vote.model.VoteActionSlideModel;
+import com.admin.controller.vote.model.VoteOfflineDataModel;
 import com.admin.dao.vote.dataobject.VoteActionSlideDO;
 import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 
@@ -59,6 +60,23 @@ import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 public class VoteProcess {
 	@Autowired
 	private VoteService voteService;
+	
+	public VoteOfflineDataModel getSum() {
+		VoteOfflineDataModel model = new VoteOfflineDataModel();
+		List<VoteListOffLineItem> items = new ArrayList<>();
+		List<VoteListOffLineDO> tags= voteService.getSum();
+		int sum=0;
+		for (VoteListOffLineDO tag : tags) {
+			sum=sum+tag.getNum();
+			VoteListOffLineItem item = new VoteListOffLineItem();
+			item.setId(tag.getId());
+			item.setNum(tag.getNum());
+			items.add(item);	
+		}
+		model.setSum(sum);
+		model.setList(items);
+		return model;	
+	}
 	
 	public SimpleFlagModel checkCode(String param) {
 		SimpleFlagModel model = new SimpleFlagModel();

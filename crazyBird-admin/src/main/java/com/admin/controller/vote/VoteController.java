@@ -25,6 +25,7 @@ import com.admin.controller.vote.param.VoteDetailByIdParam;
 import com.admin.controller.vote.param.VoteListOffLineParam;
 import com.admin.controller.vote.param.VoteRecordParam;
 import com.admin.controller.vote.model.VoteActionSlideModel;
+import com.admin.controller.vote.model.VoteOfflineDataModel;
 import com.admin.controller.vote.param.VoteActionRecordParam;
 import com.admin.controller.vote.param.VoteActionSearchDetailParam;
 import com.admin.controller.vote.param.VoteActionSlideParam;
@@ -196,9 +197,17 @@ public class VoteController {
 	public SimpleFlagModel deleteVoteActionSlide(@PathVariable Integer id) {
 		return voteProcess.deleteVoteActionSlide(id);	
 	}
+	/**
+	 * 获得投票数据
+	 */
+	@RequestMapping(value = "/getSum",method = RequestMethod.GET)
+	@ResponseBody
+	public VoteOfflineDataModel getSum() {
+		return voteProcess.getSum();	
+	}
 	
 	/**
-	 * 投票
+	 * 线下投票
 	 */
 	@RequestMapping(value = "/createCode",method = RequestMethod.POST)
 	@ResponseBody

@@ -80,6 +80,13 @@
 		<result column="picture" property="picUrl"
 			jdbcType="VARCHAR" />
 		</resultMap>
+	<resultMap id="VoteActionOffLineMap"
+		type="com.admin.dao.vote.dataobject.VoteListOffLineDO">
+		<result column="id" property="id"
+			jdbcType="INTEGER" />
+		<result column="num" property="num"
+			jdbcType="INTEGER" />
+	</resultMap>
 	<sql id="Base_Column_List">
 		id, action_name, action_introduce,vote_min,vote_max, vote_ruler, host, action_image,
 		telephone, status, visit_num,vote_sum, start_time, end_time,gmt_created,gmt_modified
@@ -124,6 +131,10 @@
 
 	<select id="getVoteActionSlide" resultMap="VoteActionSlideMap" >
 		select id,gmt_created,gmt_modified, action_id,picture from vote_slide 
+	</select>
+	
+	<select id="getSum" resultMap="VoteActionOffLineMap">
+	select id,num from vote_offline
 	</select>
 	<select id = "checkCode" resultType="java.lang.Integer" parameterType="java.lang.String">
 	select is_use from code where `code`= #{code,jdbcType=VARCHAR}

@@ -65,5 +65,5 @@ public interface VoteService {
 	
 	int createVote(List<Long> ids);
 	
-	
+	List<VoteListOffLineDO> getSum();
 }

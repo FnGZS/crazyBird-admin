@@ -205,4 +205,9 @@ public class VoteImpl implements VoteService {
 
 		return voteDao.createVote(ids);
 	}
+	@Override
+	public List<VoteListOffLineDO> getSum() {
+		// TODO Auto-generated method stub
+		return voteDao.getSum();
+	}
 }
