@@ -110,6 +110,7 @@ public class VoteProcess {
 	public SimpleFlagModel updateCode(String param) {
 		SimpleFlagModel model = new SimpleFlagModel();
 	//	voteService.updateTeacherCode(param);
+		
 		int flag= voteService.updateCode(param);
 		if (flag<=0) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
@@ -118,16 +119,42 @@ public class VoteProcess {
 		}
 		return model;
 	}
-	public SimpleFlagModel createVote(Long[] param) {
+	public SimpleFlagModel createVote(VoteListOffLineParam  param) {
+		
 		SimpleFlagModel model = new SimpleFlagModel();
+		Integer count = voteService.checkCodeIsNull(param.getCode());
+		//Integer count2 = voteService.checkTeacherCodeIsNull(param);
+		if(count==0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("非法访问");
+			return model;	
+		}
+		/*if(count2==0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("非法访问");
+			return model;	
+		}*/
+		Integer status = voteService.checkCode(param.getCode());
+		//Integer status2 = voteService.checkTeacherCode(param);
+		if(status==1) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("已被使用");
+			return model;	
+		}
 		List<Long> ids = new ArrayList<>();
-		for(int i=0;i<param.length;i++) {
-			ids.add(param[i]);
+		for(int i=0;i<param.getIds().length;i++) {
+			ids.add(param.getIds()[i]);
 		}
 		int flag = voteService.createVote(ids);
 		if(flag<=0) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
 			model.setMessage("投票失败");
+			return model;
+		}
+		int flag2= voteService.updateCode(param.getCode());
+		if (flag2<=0) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("更新失败");
 			return model;
 		}
 		return model;	

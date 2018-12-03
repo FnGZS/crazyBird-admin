@@ -211,7 +211,7 @@ public class VoteController {
 	 */
 	@RequestMapping(value = "/createCode",method = RequestMethod.POST)
 	@ResponseBody
-	public SimpleFlagModel createVote(@RequestBody Long[] param) {
+	public SimpleFlagModel createVote(@RequestBody VoteListOffLineParam param) {
 		return voteProcess.createVote(param);	
 	}
 	/**
