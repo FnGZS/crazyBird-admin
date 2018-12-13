@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.admin.controller.affairs.model.AffairsPageModel;
 import com.admin.controller.affairs.model.DeleteAffairsModel;
 import com.admin.controller.affairs.model.UpdateAffairsModel;
+import com.admin.controller.affairs.model.deleteAffairsTypeModel;
 import com.admin.controller.affairs.param.AffairsPageParam;
 import com.admin.controller.affairs.param.UpdateAffairParam;
+import com.admin.controller.affairs.param.addTypeAffairParam;
+import com.admin.controller.affairs.model.AffairsTypeModel;
 import com.admin.controller.affairs.model.AffairsDetailsModel;
 import com.admin.controller.affairs.model.AddAffairsModel;
+import com.admin.controller.affairs.model.AddAffairsTypeModel;
 import com.admin.controller.affairs.param.AddAffairsParam;
 
 import org.apache.commons.lang3.StringUtils;
@@ -95,4 +99,36 @@ public class AffairsController {
 	public UpdateAffairsModel updateAffair(@RequestBody UpdateAffairParam param) {
 		return affairsProcess.updateAffair(param);
 	}
+	
+	/**
+	 * 获取时事类别信息
+	 * @param param
+	 * @return
+	 * **/
+	@RequestMapping(value ="/type", method = RequestMethod.GET)
+	@ResponseBody
+	public AffairsTypeModel getAffairsType() {
+		return affairsProcess.getAffairsType();
+	}
+	/**
+	 * 添加类别
+	 * @param
+	 * @return
+	 * */
+	@RequestMapping(value ="/addType", method = RequestMethod.POST)
+	@ResponseBody
+	public AddAffairsTypeModel addAffairsType(@RequestBody addTypeAffairParam param) {
+		return affairsProcess.addAffairsType(param);
+	}
+	/**
+	 * 删除类别
+	 * @param
+	 * @return
+	 * */
+	@RequestMapping(value ="/deleteType", method = RequestMethod.GET)
+	@ResponseBody
+	public deleteAffairsTypeModel deleteAffairsType(Long id) {
+		return affairsProcess.deleteAffairsType(id);
+	}
+
 }
