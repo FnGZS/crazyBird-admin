@@ -17,7 +17,7 @@ public class UploadProcess {
 	/**
 	 * 访问图片地址的前缀
 	 */
-	 protected String path = "www.sxscott.com/crazyBirdimg/";
+	 protected String path = "https://www.sxscott.com/crazyBirdimg/";
 	 /**
 	  * 保存图片地址的前缀
 	  */
@@ -84,9 +84,9 @@ public class UploadProcess {
 	 * @throws Exception
 	 */
 	private String fileUpload(MultipartFile file, String picType)throws Exception { 
-	
-	
-	  String fileName =picType+"_"+DateUtil.formatDate(new Date(), DateUtil.dtLongLong)+"."+file.getOriginalFilename().split("\\.")[1];
+		
+	int length = file.getOriginalFilename().split("\\.").length;
+	  String fileName =picType+"_"+DateUtil.formatDate(new Date(), DateUtil.dtLongLong)+"."+file.getOriginalFilename().split("\\.")[length-1];
 	  //MultipartFile 类型文件不支持创建父目录，所以得用File类型
 	  File newfile = new File(filePath+picType+"/"+fileName);
 	  File fileParent = newfile.getParentFile();  
