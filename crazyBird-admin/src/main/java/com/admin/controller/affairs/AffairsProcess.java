@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.admin.controller.affairs.model.AddAffairsModel;
+import com.admin.controller.affairs.model.AddAffairsTypeModel;
 import com.admin.controller.affairs.model.AffairsItem;
 import com.admin.controller.affairs.model.AffairsPageModel;
+import com.admin.controller.affairs.model.AffairsTypeModel;
 import com.admin.controller.affairs.model.DeleteAffairsModel;
 import com.admin.controller.affairs.model.UpdateAffairsModel;
+import com.admin.controller.affairs.model.deleteAffairsTypeModel;
 import com.admin.controller.affairs.param.AddAffairsParam;
 import com.admin.controller.affairs.param.AffairsPageParam;
 import com.admin.controller.affairs.param.UpdateAffairParam;
+import com.admin.controller.affairs.param.addTypeAffairParam;
 import com.admin.controller.base.BaseProcess;
 import com.admin.dao.affairs.dataobject.AffairsDO;
 import com.admin.dao.affairs.dataobject.AffairsPO;
@@ -22,6 +26,9 @@ import com.admin.model.enums.HttpCodeEnum;
 import com.admin.service.affairs.AffairsService;
 import com.admin.service.base.ResponsePageQueryDO;
 import com.admin.utils.PageUtils;
+import com.admin.controller.affairs.model.AffairsTypeItem;
+import com.admin.dao.affairs.dataobject.AffairsTypeDO;
+import com.admin.dao.affairs.dataobject.addAffairsTypeDO;
 import com.admin.controller.affairs.model.AffairsDetailsModel;
 import com.admin.dao.affairs.dataobject.AddAffairDO;
 import com.admin.service.base.ResponseDO;
@@ -151,6 +158,50 @@ public class AffairsProcess extends BaseProcess{
 		}		
 		model.setResult(response.getDataResult());
 		model.setMessage("修改成功");
+		return model;
+	}
+
+	public AffairsTypeModel getAffairsType() {
+		AffairsTypeModel model = new AffairsTypeModel();
+		List<AffairsTypeDO> tags = affairsService.getAffairsType();
+		if(CollectionUtil.isNotEmpty(tags)) {
+			List<AffairsTypeItem> items = new ArrayList<AffairsTypeItem>();
+			for(AffairsTypeDO tag : tags) {
+				AffairsTypeItem item = new AffairsTypeItem();
+				item.setTypeid(tag.getTypeid());
+				item.setTypeName(tag.getTypename());
+				items.add(item);
+			}
+			model.setTags(items);
+		}
+		return model;
+	}
+
+	public AddAffairsTypeModel addAffairsType(addTypeAffairParam param) {
+		AddAffairsTypeModel model = new AddAffairsTypeModel();
+		addAffairsTypeDO DO = new addAffairsTypeDO();
+		DO.setTypeName(param.getTypeName());
+		ResponseDO<Long> response = affairsService.addAffairsType(DO);
+		if (!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("添加失败");
+			return model;
+		}		
+		model.setResult(response.getDataResult());
+		model.setMessage("添加成功");
+		return model;
+	}
+
+	public deleteAffairsTypeModel deleteAffairsType(Long id) {
+		deleteAffairsTypeModel model = new deleteAffairsTypeModel();
+		ResponseDO<Long> response = affairsService.deleteAffairsType(id);
+		if (!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage("删除失败");
+			return model;
+		}		
+		model.setResult(response.getDataResult());
+		model.setMessage("删除成功");
 		return model;
 	}
 

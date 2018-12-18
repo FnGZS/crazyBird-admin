@@ -5,6 +5,8 @@ import java.util.List;
 import com.admin.dao.affairs.dataobject.AddAffairDO;
 import com.admin.dao.affairs.dataobject.AffairsDO;
 import com.admin.dao.affairs.dataobject.AffairsPO;
+import com.admin.dao.affairs.dataobject.AffairsTypeDO;
+import com.admin.dao.affairs.dataobject.addAffairsTypeDO;
 import com.admin.service.base.ResponseDO;
 import com.admin.service.base.ResponsePageQueryDO;
 
@@ -19,6 +21,12 @@ public interface AffairsService {
 	AffairsDO getAffairsDetails(Long id);
 
 	ResponseDO<Long> update(AffairsDO update);
+
+	List<AffairsTypeDO> getAffairsType();
+
+	ResponseDO<Long> addAffairsType(addAffairsTypeDO dO);
+
+	ResponseDO<Long> deleteAffairsType(Long id);
 
 	
 

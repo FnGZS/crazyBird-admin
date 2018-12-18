@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.admin.dao.affairs.AffairsDao;
+import com.admin.dao.affairs.AffairsMenuDao;
 import com.admin.dao.affairs.dataobject.AddAffairDO;
 import com.admin.dao.affairs.dataobject.AffairsDO;
 import com.admin.dao.affairs.dataobject.AffairsPO;
+import com.admin.dao.affairs.dataobject.AffairsTypeDO;
+import com.admin.dao.affairs.dataobject.addAffairsTypeDO;
 import com.admin.service.affairs.AffairsService;
 import com.admin.service.base.ResponseDO;
 import com.admin.service.base.ResponsePageQueryDO;
+import com.admin.service.base.ResponseCode;
 
 
 @Component("AffairsService")
@@ -19,6 +23,8 @@ public class AffairsServiceImpl implements AffairsService{
 
 	@Autowired
 	private AffairsDao affairsDao;
+	@Autowired
+	private AffairsMenuDao affairsMenuDao;
 	
 	@Override
 	public ResponsePageQueryDO<List<AffairsDO>> getAffairsList(AffairsPO po) {
@@ -41,6 +47,7 @@ public class AffairsServiceImpl implements AffairsService{
 			result.setDataResult((long) 1);
 			return result;
 		}
+		result.setCode(ResponseCode.ERROR);
 		result.setDataResult((long) 0);
 		return result;
 	}
@@ -55,6 +62,7 @@ public class AffairsServiceImpl implements AffairsService{
 			result.setDataResult((long) 1);
 			return result;
 		}
+		result.setCode(ResponseCode.ERROR);
 		result.setDataResult((long) 0);
 		return result;
 	}
@@ -76,6 +84,40 @@ public class AffairsServiceImpl implements AffairsService{
 			result.setDataResult((long) 1);
 			return result;
 		}
+		result.setCode(ResponseCode.ERROR);
+		result.setDataResult((long) 0);
+		return result;
+	}
+
+	@Override
+	public List<AffairsTypeDO> getAffairsType() {
+		return affairsMenuDao.getAffairsType();
+	}
+
+	@Override
+	public ResponseDO<Long> addAffairsType(addAffairsTypeDO DO) {
+		ResponseDO<Long> result = new ResponseDO<>();
+		if(DO!=null) {
+			affairsMenuDao.addAffairsType(DO);
+			result.setMessage("添加成功");
+			result.setDataResult((long) 1);
+			return result;
+		}
+		result.setCode(ResponseCode.ERROR);
+		result.setDataResult((long) 0);
+		return result;
+	}
+
+	@Override
+	public ResponseDO<Long> deleteAffairsType(Long id) {
+		ResponseDO<Long> result = new ResponseDO<>();
+		if(id!=null) {
+			affairsMenuDao.deleteAffairsType(id);
+			result.setMessage("删除成功");
+			result.setDataResult((long) 1);
+			return result;
+		}
+		result.setCode(ResponseCode.ERROR);
 		result.setDataResult((long) 0);
 		return result;
 	}

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.admin.dao.affairs.dataobject.AffairsDO;
 import com.admin.dao.affairs.dataobject.AffairsPO;
+import com.admin.dao.affairs.dataobject.addAffairsTypeDO;
+import com.admin.service.base.ResponseDO;
 import com.admin.dao.affairs.dataobject.AddAffairDO;
 
 public interface AffairsDao {
