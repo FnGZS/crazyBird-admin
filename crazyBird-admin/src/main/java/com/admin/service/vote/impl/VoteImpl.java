@@ -39,7 +39,9 @@ public class VoteImpl implements VoteService {
 		ResponsePageQueryDO<List<VoteActionDO>> response = new ResponsePageQueryDO<>();
 		response.setPageIndex(po.getPageIndex());
 		response.setPageSize(po.getPageSize());
+		System.out.println(1);
 		response.setTotal(voteDao.getVoteActionCount(po.getStatus()));
+		System.out.println(2);
 		if (response.getTotal() > 0 && response.getTotalPage() > po.getPageIndex()) {
 			List<VoteActionDO> actionList = voteDao.getVoteActionlist(po);
 			response.setDataResult(actionList);

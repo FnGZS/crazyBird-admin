@@ -15,7 +15,7 @@
 			jdbcType="VARCHAR" />
 		<result column="telephone" property="telephone"
 			jdbcType="VARCHAR" />
-		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="visit_num" property="visitNum"
 			jdbcType="BIGINT" />
 		<result column="vote_max" property="voteMax"
@@ -96,7 +96,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from vote_action 
-		<if test="status != null">
+		<if test="status!= null">
 		where 
 		`status`= #{status,jdbcType=INTEGER}
 		</if>
