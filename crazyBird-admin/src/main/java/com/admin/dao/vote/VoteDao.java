@@ -15,7 +15,7 @@ import com.admin.dao.vote.dataobject.VoteListOffLineDO;
 public interface VoteDao {
 	//得到投票活动列表
 	List<VoteActionDO> getVoteActionlist(VoteActionPO po);
-	
+
 	//得到当前投票活动
 	VoteActionDO getVoteAction(Long id);
 	

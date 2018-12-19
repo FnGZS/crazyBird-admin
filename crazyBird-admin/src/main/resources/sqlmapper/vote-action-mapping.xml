@@ -104,6 +104,8 @@
 		order by start_time desc
 		limit #{startPos,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 	</select>
+	
+	
 	<select id="getVoteActionCount" resultType="java.lang.Integer"
 		parameterType="java.lang.Integer">
 		select

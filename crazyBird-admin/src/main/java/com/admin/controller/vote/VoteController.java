@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.admin.controller.base.SimpleFlagModel;
+import com.admin.controller.vote.model.VoteActionByIdModel;
 import com.admin.controller.vote.model.VoteActionDetailListModel;
 import com.admin.controller.vote.model.VoteActionDetailRankModel;
 import com.admin.controller.vote.model.VoteActionHotListModel;
@@ -50,6 +51,16 @@ public class VoteController {
 	@ResponseBody
 	public VoteActionListModel getActionList(@RequestBody VoteActionStatusParam param){
 		return voteProcess.getActionList(param);
+	}
+	/**
+	 * 获得活动列表
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/getAction/{id}",method = RequestMethod.GET)
+	@ResponseBody
+	public VoteActionByIdModel getActionList(@PathVariable Long id){
+		return voteProcess.getAction(id);
 	}
 	
 	/**

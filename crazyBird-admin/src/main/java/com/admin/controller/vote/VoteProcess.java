@@ -9,9 +9,11 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.admin.controller.base.SimpleFlagModel;
+import com.admin.controller.vote.model.VoteActionByIdModel;
 import com.admin.controller.vote.model.VoteActionCheckRecordModel;
 import com.admin.controller.vote.model.VoteActionDetailItem;
 import com.admin.controller.vote.model.VoteActionDetailListModel;
@@ -257,7 +259,32 @@ public class VoteProcess {
 		model.setVoteDetailList(detailItems);
 		return model;
 	}
+	public VoteActionByIdModel getAction(Long id){
+		VoteActionByIdModel model = new VoteActionByIdModel();
 
+		VoteActionPO po = new VoteActionPO();
+
+		VoteActionDO voteActionDO = voteService.getAction(id);
+		
+		model.setId(voteActionDO.getId());
+		model.setActionIntro(voteActionDO.getActionIntro());
+		model.setActionName(voteActionDO.getActionName());
+		model.setStartTime(DateUtil.formatDate(voteActionDO.getStartTime(), DateUtil.DATE_FORMAT_YMDHMS));
+		model.setEndTime(DateUtil.formatDate(voteActionDO.getEndTime(), DateUtil.DATE_FORMAT_YMDHMS));
+		model.setGmtCreated(DateUtil.formatDate(voteActionDO.getGmtCreated(), DateUtil.DATE_FORMAT_YMDHMS));
+		model.setGmtModified(DateUtil.formatDate(voteActionDO.getGmtModified(), DateUtil.DATE_FORMAT_YMDHMS));
+		model.setActionImage(voteActionDO.getActionImage());
+		model.setHost(voteActionDO.getHost());
+		model.setStatus(voteActionDO.getStatus());
+		model.setTelephone(voteActionDO.getTelephone());
+		model.setVoteMax(voteActionDO.getVoteMax());
+		model.setVoteMin(voteActionDO.getVoteMin());
+		model.setVisitNum(voteActionDO.getVisitNum());
+		model.setVoteRuler(voteActionDO.getVoteRuler());
+		model.setVoteSum(voteActionDO.getVoteSum());
+		return model;
+	
+	}
 	public VoteActionHotListModel getVoteActionHotList() {
 		VoteActionHotListModel model = new VoteActionHotListModel();
 		List<VoteActionHotDTO> tags = voteService.getVoteActionHotList();
