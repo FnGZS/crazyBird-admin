@@ -10,14 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.ls.LSOutput;
 
 import com.admin.controller.lost.model.LostDetailsModel;
 import com.admin.controller.lost.model.LostInputModel;
 import com.admin.controller.lost.model.LostMessageModel;
 import com.admin.controller.lost.model.LostPageModel;
+import com.admin.controller.lost.model.LostTypeInputModel;
 import com.admin.controller.lost.model.LostTypeModel;
+import com.admin.controller.lost.model.LostTypeUpdateModel;
+import com.admin.controller.lost.model.LostUpdateModel;
 import com.admin.controller.lost.param.LostInputParam;
 import com.admin.controller.lost.param.LostPageParam;
+import com.admin.controller.lost.param.LostTypeInputParam;
+import com.admin.controller.lost.param.LostTypeUpdateParam;
+import com.admin.controller.lost.param.LostUpdateParam;
 
 
 @Controller
@@ -88,6 +95,46 @@ public class LostController {
 		return lostProcess.lostInput(param);
 	}
 	
+	
+	/** 
+	 * 失物类型录入
+	 * @param param
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/lostTypeInput",method = RequestMethod.POST)
+	@ResponseBody
+	public LostTypeInputModel setLostTypeInput(@RequestBody LostTypeInputParam param){
+		return lostProcess.lostTypeInput(param);
+	}
+	
+	
+	/** 
+	 * 失物类型删除
+	 * @param param
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/LostTypeDelete/{id}",method = RequestMethod.DELETE)
+	@ResponseBody
+	public LostTypeInputModel LostTypeDelete(@PathVariable Long id) {
+		return lostProcess.lostTypeDelete(id);
+	}
+	
+	/** 
+	 * 失物类型修改
+	 * @param param
+	 * @return
+	 */
+	
+	
+	@RequestMapping(value = "/lostTypeUpdate",method = RequestMethod.POST)
+	@ResponseBody
+	public LostTypeUpdateModel LostTypeDelete(@RequestBody LostTypeUpdateParam param) {
+		return lostProcess.lostTypeUpdate(param);
+	}
+	
+	
 	/**
 	 *删除发布的记录
 	 * @param param
@@ -98,5 +145,17 @@ public class LostController {
 	@ResponseBody
 	public LostInputModel getLostDelete(@PathVariable Long id) {
 		return lostProcess.getLostDelete(id);
+	}
+	
+	/** 
+	 * 失物信息更新
+	 * @param param
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/lostUpdate",method = RequestMethod.POST)
+	@ResponseBody
+	public LostUpdateModel setLostUpdate(@RequestBody LostUpdateParam param) {
+		return lostProcess.lostUpdate(param);
 	}
 }

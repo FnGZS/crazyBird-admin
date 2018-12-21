@@ -22,5 +22,17 @@ public abstract interface LostService {
 
 	ResponseDO<LostDTO> lostDelete(Long id);
 
+	ResponseDO<Long> lostUpdate(LostArticleDO update);
+
+	ResponseDO<LostDTO> lostTypeInput(LostTypeDO dO);
+
+	ResponseDO<LostDTO> lostTypeDelete(Long id);
+
+	ResponseDO<Long> lostTypeUpdate(LostTypeDO update);
+
+
+
+	
+
 
 }

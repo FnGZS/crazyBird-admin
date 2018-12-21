@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.ls.LSOutput;
 
 import com.admin.controller.base.BaseProcess;
 import com.admin.controller.lost.model.LostDetailsModel;
@@ -13,10 +14,16 @@ import com.admin.controller.lost.model.LostItem;
 import com.admin.controller.lost.model.LostMessageItem;
 import com.admin.controller.lost.model.LostMessageModel;
 import com.admin.controller.lost.model.LostPageModel;
+import com.admin.controller.lost.model.LostTypeInputModel;
 import com.admin.controller.lost.model.LostTypeItem;
 import com.admin.controller.lost.model.LostTypeModel;
+import com.admin.controller.lost.model.LostTypeUpdateModel;
+import com.admin.controller.lost.model.LostUpdateModel;
 import com.admin.controller.lost.param.LostInputParam;
 import com.admin.controller.lost.param.LostPageParam;
+import com.admin.controller.lost.param.LostTypeInputParam;
+import com.admin.controller.lost.param.LostTypeUpdateParam;
+import com.admin.controller.lost.param.LostUpdateParam;
 import com.admin.dao.lost.dataobject.LostArticleDO;
 import com.admin.dao.lost.dataobject.LostDTO;
 import com.admin.dao.lost.dataobject.LostPO;
@@ -186,6 +193,78 @@ public class LostProcess extends BaseProcess{
 	public LostInputModel getLostDelete(Long id) {
 		LostInputModel model = new LostInputModel();
 		ResponseDO<LostDTO> response = lostService.lostDelete(id);
+		if(!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage(response.getMessage());
+		}
+		else {
+			model.setCode(HttpCodeEnum.SUCCESS.getCode());
+			model.setMessage(response.getMessage());
+		}
+		return model;
+	}
+
+	public LostUpdateModel lostUpdate(LostUpdateParam param) {
+		LostUpdateModel model = new LostUpdateModel();
+		LostArticleDO update = new LostArticleDO();
+		update.setId(param.getId());
+		update.setAddress(param.getAddress());
+		update.setContact(param.getContact());
+		update.setContent(param.getContent());
+		update.setFoundPic(param.getFoundPic());
+		update.setMessageId(param.getMessageId());
+		update.setPersonal(param.getPersonal());
+		update.setTitle(param.getTitle());
+		update.setTitlePic(param.getTitlePic());
+		update.setTypeId(param.getTypeId());
+		ResponseDO<Long> response = lostService.lostUpdate(update);
+		if(!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage(response.getMessage());
+		}
+		else {
+			model.setCode(HttpCodeEnum.SUCCESS.getCode());
+			model.setMessage(response.getMessage());
+		}
+		return model;
+	}
+
+	public LostTypeInputModel lostTypeInput(LostTypeInputParam param) {
+		LostTypeInputModel model = new LostTypeInputModel();
+		LostTypeDO DO = new LostTypeDO();
+		DO.setTypeName(param.getTypeName());
+		ResponseDO<LostDTO> response = lostService.lostTypeInput(DO);
+		if(!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage(response.getMessage());
+		}
+		else {
+			model.setCode(HttpCodeEnum.SUCCESS.getCode());
+			model.setMessage(response.getMessage());
+		}
+		return model;
+	}
+
+	public LostTypeInputModel lostTypeDelete(Long id) {
+		LostTypeInputModel model = new LostTypeInputModel();
+		ResponseDO<LostDTO> response = lostService.lostTypeDelete(id);
+		if(!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage(response.getMessage());
+		}
+		else {
+			model.setCode(HttpCodeEnum.SUCCESS.getCode());
+			model.setMessage(response.getMessage());
+		}
+		return model;
+	}
+
+	public LostTypeUpdateModel lostTypeUpdate(LostTypeUpdateParam param) {
+		LostTypeUpdateModel model = new LostTypeUpdateModel();
+		LostTypeDO update = new LostTypeDO();
+		update.setTypeId(param.getId());
+		update.setTypeName(param.getTypeName());
+		ResponseDO<Long> response = lostService.lostTypeUpdate(update);
 		if(!response.isSuccess()) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
 			model.setMessage(response.getMessage());

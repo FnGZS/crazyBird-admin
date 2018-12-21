@@ -88,6 +88,64 @@ public class LostServiceImpl implements LostService{
 		}
 		return response;
 	}
+
+	@Override
+	public ResponseDO<Long> lostUpdate(LostArticleDO update) {
+		ResponseDO<Long> response = new ResponseDO<>();
+		int status = lostArticleDao.update(update);
+		if(status == 1) {
+			response.setCode(ResponseCode.SUCCESS);
+			response.setMessage("修改成功");
+		}else {
+			response.setCode(ResponseCode.ERROR);
+			response.setMessage("修改失败");
+		}
+		return response;
+	}
+
+	@Override
+	public ResponseDO<LostDTO> lostTypeInput(LostTypeDO dO) {
+		ResponseDO<LostDTO> response = new ResponseDO<>();
+		if(lostArticleTypeDao.insert(dO)) {
+			response.setCode(ResponseCode.SUCCESS);
+			response.setMessage("录入成功");
+		}
+		else {
+			response.setCode(ResponseCode.ERROR);
+			response.setMessage("录入失败");
+		}
+		return response;
+	}
+
+	@Override
+	public ResponseDO<LostDTO> lostTypeDelete(Long id) {
+		ResponseDO<LostDTO> response = new ResponseDO<>();
+		if(lostArticleTypeDao.delete(id)) {
+			response.setCode(ResponseCode.SUCCESS);
+			response.setMessage("删除成功");
+		}
+		else {
+			response.setCode(ResponseCode.ERROR);
+			response.setMessage("删除失败");
+		}
+		return response;
+	}
+
+	@Override
+	public ResponseDO<Long> lostTypeUpdate(LostTypeDO update) {
+		ResponseDO<Long> response = new ResponseDO<>();
+		if(lostArticleTypeDao.update(update)) {
+			response.setCode(ResponseCode.SUCCESS);
+			response.setMessage("修改成功");
+		}
+		else {
+			response.setCode(ResponseCode.ERROR);
+			response.setMessage("修改失败");
+		}
+		return response;
+	}
+
+
 	
 
 	

@@ -1,13 +1,14 @@
 package com.admin.dao.lost.dataobject;
 
 public class LostTypeDO {
-	private Integer typeId;
+	private Long typeId;
 	private String message;
 	private String typeName;
-	public Integer getTypeId() {
+
+	public Long getTypeId() {
 		return typeId;
 	}
-	public void setTypeId(Integer typeId) {
+	public void setTypeId(Long typeId) {
 		this.typeId = typeId;
 	}
 	public String getMessage() {

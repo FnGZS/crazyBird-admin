@@ -19,5 +19,7 @@ public abstract interface LostArticleDao {
 	int insert(LostArticleDO dO);
 
 	int delete(Long id);
+
+	int update(LostArticleDO update);
 	
 }

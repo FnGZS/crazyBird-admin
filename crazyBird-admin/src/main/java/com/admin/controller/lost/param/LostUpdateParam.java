@@ -1,22 +1,17 @@
-package com.admin.dao.lost.dataobject;
+package com.admin.controller.lost.param;
 
-public class LostArticleDO {
+public class LostUpdateParam {
 	private Long id;
 	private String personal;
 	private String title;
 	private String titlePic;
-	private Long publisher;
 	private String foundPic;
 	private String content;
 	private String contact;
 	private String address;
 	private Integer messageId;
 	private Integer typeId;
-	private Integer isExamine;
-	private Integer brow;
-	private Integer isSolve;
-	private String gmtCreated;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -40,12 +35,6 @@ public class LostArticleDO {
 	}
 	public void setTitlePic(String titlePic) {
 		this.titlePic = titlePic;
-	}
-	public Long getPublisher() {
-		return publisher;
-	}
-	public void setPublisher(Long publisher) {
-		this.publisher = publisher;
 	}
 	public String getFoundPic() {
 		return foundPic;
@@ -82,30 +71,6 @@ public class LostArticleDO {
 	}
 	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
-	}
-	public Integer getIsExamine() {
-		return isExamine;
-	}
-	public void setIsExamine(Integer isExamine) {
-		this.isExamine = isExamine;
-	}
-	public Integer getBrow() {
-		return brow;
-	}
-	public void setBrow(Integer brow) {
-		this.brow = brow;
-	}
-	public Integer getIsSolve() {
-		return isSolve;
-	}
-	public void setIsSolve(Integer isSolve) {
-		this.isSolve = isSolve;
-	}
-	public String getGmtCreated() {
-		return gmtCreated;
-	}
-	public void setGmtCreated(String gmtCreated) {
-		this.gmtCreated = gmtCreated;
 	}
 	
 }

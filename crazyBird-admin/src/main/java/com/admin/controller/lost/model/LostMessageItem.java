@@ -2,12 +2,13 @@ package com.admin.controller.lost.model;
 
 public class LostMessageItem {
 	
-	private Integer typeId;
+	private Long typeId;
 	private String message;
-	public Integer getTypeId() {
+
+	public Long getTypeId() {
 		return typeId;
 	}
-	public void setTypeId(Integer typeId) {
+	public void setTypeId(Long typeId) {
 		this.typeId = typeId;
 	}
 	public String getMessage() {

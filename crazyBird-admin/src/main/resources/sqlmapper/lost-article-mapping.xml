@@ -101,4 +101,19 @@
 		<delete id="delete" parameterType="java.lang.Long">
   			delete from lost_article where id=#{id,jdbcType=BIGINT}			
 		</delete>
+		<update id="update" parameterType="com.admin.dao.lost.dataobject.LostArticleDO">
+			update lost_article
+			set
+				title = #{title,jdbcType=VARCHAR},
+	  			personal = #{personal,jdbcType=VARCHAR},
+	  			title_pic = #{titlePic,jdbcType=VARCHAR},
+	  			publisher = #{publisher,jdbcType=BIGINT},
+	  			found_pic = #{foundPic,jdbcType=VARCHAR},
+	  			content = #{content,jdbcType=VARCHAR},
+	  			contact = #{contact,jdbcType=VARCHAR},
+	  			address = #{address,jdbcType=VARCHAR},
+	  			message_id = #{messageId,jdbcType=BIGINT},
+	  			type_id = #{typeId,jdbcType=BIGINT}
+				where id = #{id,jdbcType=BIGINT}
+		</update>
 </mapper>
