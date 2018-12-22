@@ -10,6 +10,7 @@ public class VoteActionRecordItem {
 	private String voteRuler;
 	private String host;
 	private String telephone;
+	private String studentId;
 	private Integer status;
 	private Long visitNum;
 	public String getDetail() {
@@ -18,6 +19,14 @@ public class VoteActionRecordItem {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+	
+	public String getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
 	private Long voteSum;
 	private String gmtCreated;
 	private  String detail;

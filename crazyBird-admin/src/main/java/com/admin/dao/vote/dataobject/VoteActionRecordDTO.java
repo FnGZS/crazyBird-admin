@@ -13,8 +13,16 @@ public class VoteActionRecordDTO {
 	private String host;
 	private String telephone;
 	private Integer status;
+	private Long studentId;
 	private Long visitNum;
 	private Long voteSum;
+	
+	public Long getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
 	public String getDetail() {
 		return detail;
 	}

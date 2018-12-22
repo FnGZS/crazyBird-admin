@@ -26,13 +26,14 @@
 		<result column="host" property="host" jdbcType="VARCHAR" />
 		<result column="action_image" property="actionImage"
 			jdbcType="VARCHAR" />
-		<result column="telephone" property="telephone"
+		<result column="phone" property="telephone"
 			jdbcType="VARCHAR" />
 		<result column="detail" property="detail"
 			jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="TINYINT" />
 		<result column="visit_num" property="visitNum"
 			jdbcType="BIGINT" />
+		<result column="student_id" property="studentId" jdbcType="BIGINT" />
 		<result column="vote_sum" property="voteSum" jdbcType="BIGINT" />
 		<result column="start_time" property="startTime"
 			jdbcType="TIMESTAMP" />
@@ -43,10 +44,11 @@
 	</resultMap>
 	<select id="getVoteActionUserRecord" resultMap="VoteRecordMap" parameterType="com.admin.dao.vote.dataobject.VoteActionRecordPO">
 	SELECT va.id,va.action_name,va.action_image,va.action_introduce,va.vote_ruler,va.`host`,
-	va.telephone,va.`status`,va.visit_num,va.vote_sum,va.start_time,va.end_time,vr.detail,
+	vr.student_id,u.phone,va.`status`,va.visit_num,va.vote_sum,va.start_time,va.end_time,vr.detail,
 	vr.gmt_created 
 	FROM vote_action va 
 	LEFT JOIN vote_record vr on vr.action_id = va.id 
+	LEFT JOIN `user` u on u.school_num=vr.student_id
 	where vr.student_id = #{id,jdbcType=BIGINT} 
 	ORDER BY vr.gmt_created desc 
 	limit #{startPos,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
@@ -54,10 +56,11 @@
 	
 	<select id="getVoteActionRecord" resultMap="VoteRecordMap" parameterType="com.admin.dao.vote.dataobject.VoteActionRecordPO">
 	SELECT va.id,va.action_name,va.action_image,va.action_introduce,va.vote_ruler,va.`host`,
-	va.telephone,va.`status`,va.visit_num,va.vote_sum,va.start_time,va.end_time,vr.detail,
+	vr.student_id,u.phone,va.`status`,va.visit_num,va.vote_sum,va.start_time,va.end_time,vr.detail,
 	vr.gmt_created 
 	FROM vote_action va 
 	LEFT JOIN vote_record vr on vr.action_id = va.id 
+	LEFT JOIN `user` u on u.school_num=vr.student_id
 	where vr.action_id = #{id,jdbcType=BIGINT} 
 	ORDER BY vr.gmt_created desc 
 	limit #{startPos,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}

@@ -565,6 +565,7 @@ public class VoteProcess {
 				item.setVoteRuler(tag.getVoteRuler());
 				item.setVoteSum(tag.getVoteSum());
 				item.setDetail(tag.getDetail());
+				item.setStudentId(String.valueOf(tag.getStudentId()));
 				item.setGmtCreated(DateUtil.formatDate(tag.getGmtCreated(), DateUtil.DATE_FORMAT_YMDHMS));
 				recordItems.add(item);
 				}
