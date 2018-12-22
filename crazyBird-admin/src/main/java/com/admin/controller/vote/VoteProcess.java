@@ -411,7 +411,7 @@ public class VoteProcess {
 		detailDO.setNum(param.getNum());
 		detailDO.setPeopleName(param.getPeopleName());
 		detailDO.setSerialId(param.getSerialId());
-
+		detailDO.setDetail(param.getDetail());
 		
 		int count = voteService.updateVoteActionDetail(detailDO);
 		if(count<=0) {
