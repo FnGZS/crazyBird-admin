@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.admin.dao.live.LiveDao">
+	<resultMap id="BaseResultMap"
+		type="com.admin.dao.live.dataobject.LiveDO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title"
+			jdbcType="VARCHAR" />
+		<result column="status" property="status"
+			jdbcType="INTEGER" />
+		<result column="play_url" property="playUrl"
+			jdbcType="VARCHAR" />
+		<result column="push_url" property="pushUrl"
+			jdbcType="VARCHAR" />
+		<result column="stream_id" property="streamId"
+			jdbcType="VARCHAR" />
+		<result column="end_time" property="endTime"
+			jdbcType="TIMESTAMP" />
+		<result column="gmt_created" property="gmtCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified"
+			jdbcType="TIMESTAMP" />
+		
+	</resultMap>
+  <sql id="Base_Column_List" >
+    id, title,`status`,stream_id ,push_url,play_url,end_time,gmt_created,gmt_modified
+  </sql>
+  <select id="getPushUrlList" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from live
+  </select>
+  <insert id="addPushUrl" parameterType="com.admin.dao.live.dataobject.LiveDO">
+  insert into live 
+  (
+  id, 
+  title,
+  `status` ,
+  push_url,
+  stream_id,
+  play_url,
+  end_time,
+  gmt_created,
+  gmt_modified
+  )
+  values
+  (
+  #{id,jdbcType=INTEGER},
+  #{title,jdbcType=VARCHAR},
+  #{status,jdbcType=INTEGER},
+  #{pushUrl,jdbcType=VARCHAR},
+  #{streamId,jdbcType=VARCHAR},
+  #{playUrl,jdbcType=VARCHAR},
+  #{endTime,jdbcType=TIMESTAMP},
+  now(),
+  now()
+   
+  )
+   
+  </insert>
+</mapper>

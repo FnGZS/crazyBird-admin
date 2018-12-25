@@ -12,6 +12,7 @@ import com.admin.controller.upload.model.MultiPicUploadModel;
 import com.admin.controller.upload.param.UploadPicParam;
 import com.admin.model.enums.HttpCodeEnum;
 import com.admin.utils.DateUtil;
+import com.admin.utils.RandomUtil;
 @Component
 public class UploadProcess {
 	/**
@@ -85,18 +86,20 @@ public class UploadProcess {
 	 */
 	private String fileUpload(MultipartFile file, String picType)throws Exception { 
 		
-	int length = file.getOriginalFilename().split("\\.").length;
-	  String fileName =picType+"_"+DateUtil.formatDate(new Date(), DateUtil.dtLongLong)+"."+file.getOriginalFilename().split("\\.")[length-1];
-	  //MultipartFile 类型文件不支持创建父目录，所以得用File类型
-	  File newfile = new File(filePath+picType+"/"+fileName);
-	  File fileParent = newfile.getParentFile();  
-	  //父目录不存在就创建目录
-	  if(!fileParent.exists()){  
-		  fileParent.mkdirs();  
-		 }  
-	  file.transferTo(new File(filePath+picType+"/"+fileName));
-	  String picUrl = path+picType+"/"+fileName;
-	  return picUrl;		
+		String random = RandomUtil.getRandomNumString(8);
+		int length = file.getOriginalFilename().split("\\.").length;
+		  String fileName =picType+"_"+DateUtil.formatDate(new Date(), DateUtil.dtLongLong)+"_"+random+"."+file.getOriginalFilename().split("\\.")[length-1];
+		  //MultipartFile 类型文件不支持创建父目录，所以得用File类型
+		  File newfile = new File(filePath+picType+"/"+fileName);
+		  File fileParent = newfile.getParentFile();  
+		  //父目录不存在就创建目录
+		  if(!fileParent.exists()){  
+			  fileParent.mkdirs();  
+			 }  
+		  file.transferTo(new File(filePath+picType+"/"+fileName));
+		  String picUrl = path+picType+"/"+fileName;
+		  return picUrl;		
+		
 	}
 	
     /**
