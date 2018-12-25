@@ -116,4 +116,10 @@
 	  			type_id = #{typeId,jdbcType=BIGINT}
 				where id = #{id,jdbcType=BIGINT}
 		</update>
+		<update id="examine" parameterType="com.admin.dao.lost.dataobject.LostDTO">
+			update lost_article
+			set
+	  			is_examine = #{isExamine,jdbcType=BIGINT}
+			where id = #{id,jdbcType=BIGINT}
+		</update>
 </mapper>

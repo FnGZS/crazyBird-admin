@@ -9,6 +9,7 @@ import org.w3c.dom.ls.LSOutput;
 
 import com.admin.controller.base.BaseProcess;
 import com.admin.controller.lost.model.LostDetailsModel;
+import com.admin.controller.lost.model.LostExamineModel;
 import com.admin.controller.lost.model.LostInputModel;
 import com.admin.controller.lost.model.LostItem;
 import com.admin.controller.lost.model.LostMessageItem;
@@ -19,6 +20,7 @@ import com.admin.controller.lost.model.LostTypeItem;
 import com.admin.controller.lost.model.LostTypeModel;
 import com.admin.controller.lost.model.LostTypeUpdateModel;
 import com.admin.controller.lost.model.LostUpdateModel;
+import com.admin.controller.lost.param.LostExamineParam;
 import com.admin.controller.lost.param.LostInputParam;
 import com.admin.controller.lost.param.LostPageParam;
 import com.admin.controller.lost.param.LostTypeInputParam;
@@ -275,7 +277,25 @@ public class LostProcess extends BaseProcess{
 		}
 		return model;
 	}
-	
+
+	public LostExamineModel lostExamineUpdate(LostExamineParam param) {
+		LostExamineModel model = new LostExamineModel();
+		LostDTO update = new LostDTO();
+		update.setId(param.getId());
+		update.setIsExamine(param.getIsExamine());
+		ResponseDO<LostDTO> response = lostService.lostExamineUpdate(update);
+		if(!response.isSuccess()) {
+			model.setCode(HttpCodeEnum.ERROR.getCode());
+			model.setMessage(response.getMessage());
+		}
+		else {
+			model.setCode(HttpCodeEnum.SUCCESS.getCode());
+			model.setMessage(response.getMessage());
+		}
+		return model;
+	}
+
+
 	
 	
 }
