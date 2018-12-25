@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.ls.LSOutput;
 
 import com.admin.controller.lost.model.LostDetailsModel;
+import com.admin.controller.lost.model.LostExamineModel;
 import com.admin.controller.lost.model.LostInputModel;
 import com.admin.controller.lost.model.LostMessageModel;
 import com.admin.controller.lost.model.LostPageModel;
@@ -20,6 +21,7 @@ import com.admin.controller.lost.model.LostTypeInputModel;
 import com.admin.controller.lost.model.LostTypeModel;
 import com.admin.controller.lost.model.LostTypeUpdateModel;
 import com.admin.controller.lost.model.LostUpdateModel;
+import com.admin.controller.lost.param.LostExamineParam;
 import com.admin.controller.lost.param.LostInputParam;
 import com.admin.controller.lost.param.LostPageParam;
 import com.admin.controller.lost.param.LostTypeInputParam;
@@ -157,5 +159,17 @@ public class LostController {
 	@ResponseBody
 	public LostUpdateModel setLostUpdate(@RequestBody LostUpdateParam param) {
 		return lostProcess.lostUpdate(param);
+	}
+	
+	/** 
+	 * 审核
+	 * @param param
+	 * @return
+	 */
+	
+	@RequestMapping(value = "lostExamineUpdate",method = RequestMethod.POST)
+	@ResponseBody
+	public LostExamineModel setExamine(@RequestBody LostExamineParam param){
+		return lostProcess.lostExamineUpdate(param);
 	}
 }

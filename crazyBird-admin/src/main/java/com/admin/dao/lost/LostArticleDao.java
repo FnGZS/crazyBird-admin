@@ -21,5 +21,7 @@ public abstract interface LostArticleDao {
 	int delete(Long id);
 
 	int update(LostArticleDO update);
+
+	boolean examine(LostDTO update);
 	
 }
