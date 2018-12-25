@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.admin.controller.lost.param.LostExamineParam;
 import com.admin.dao.lost.LostArticleDao;
 import com.admin.dao.lost.LostArticleTypeDao;
 import com.admin.dao.lost.LostMessageDao;
@@ -141,6 +142,20 @@ public class LostServiceImpl implements LostService{
 		else {
 			response.setCode(ResponseCode.ERROR);
 			response.setMessage("修改失败");
+		}
+		return response;
+	}
+
+	@Override
+	public ResponseDO<LostDTO> lostExamineUpdate(LostDTO update) {
+		ResponseDO<LostDTO> response = new ResponseDO<>();
+		if(lostArticleDao.examine(update)) {
+			response.setCode(ResponseCode.SUCCESS);
+			response.setMessage("成功");
+		}
+		else {
+			response.setCode(ResponseCode.ERROR);
+			response.setMessage("失败");
 		}
 		return response;
 	}
