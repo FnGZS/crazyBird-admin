@@ -12,6 +12,8 @@
 			jdbcType="VARCHAR" />
 		<result column="push_url" property="pushUrl"
 			jdbcType="VARCHAR" />
+		<result column="image_url" property="imageUrl"
+			jdbcType="VARCHAR" />
 		<result column="stream_id" property="streamId"
 			jdbcType="VARCHAR" />
 		<result column="end_time" property="endTime"
@@ -23,7 +25,7 @@
 		
 	</resultMap>
   <sql id="Base_Column_List" >
-    id, title,`status`,stream_id ,push_url,play_url,end_time,gmt_created,gmt_modified
+    id, title,`status`,stream_id ,push_url,image_url,play_url,end_time,gmt_created,gmt_modified
   </sql>
   <select id="getPushUrlList" resultMap="BaseResultMap">
   	select
@@ -35,6 +37,7 @@
   (
   id, 
   title,
+  image_url,
   `status` ,
   push_url,
   stream_id,
@@ -47,6 +50,7 @@
   (
   #{id,jdbcType=INTEGER},
   #{title,jdbcType=VARCHAR},
+   #{imageUrl,jdbcType=VARCHAR},
   #{status,jdbcType=INTEGER},
   #{pushUrl,jdbcType=VARCHAR},
   #{streamId,jdbcType=VARCHAR},

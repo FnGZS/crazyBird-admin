@@ -7,6 +7,7 @@ public class LiveUrlItem {
 	private String title;
 	private Integer status;
 	private String pushUrl;
+	private String imageUrl;
 	private String playUrl;
 	private String streamId;
 	private String endTime;
@@ -18,6 +19,13 @@ public class LiveUrlItem {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public String getTitle() {
 		return title;

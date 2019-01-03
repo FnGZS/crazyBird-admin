@@ -57,6 +57,7 @@ public class LiveProcess {
 			}
 		}
 		sb.append("]");
+		liveDO.setImageUrl(param.getImageUrl());
 		liveDO.setPlayUrl(sb.toString());
 		liveDO.setPushUrl(pushUrl);
 		liveDO.setStreamId(param.getStreamId());
@@ -88,6 +89,7 @@ public class LiveProcess {
 			item.setPlayUrl(tag.getPlayUrl());
 			item.setPushUrl(tag.getPushUrl());
 			item.setStatus(tag.getStatus());
+			item.setImageUrl(tag.getImageUrl());
 			item.setStreamId(tag.getStreamId());
 			item.setTitle(tag.getTitle());
 			items.add(item);

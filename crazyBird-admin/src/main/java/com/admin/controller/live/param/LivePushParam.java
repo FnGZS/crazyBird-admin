@@ -6,7 +6,14 @@ public class LivePushParam {
 	private String streamId;
 	private String txTime;
 	private Integer status;
+	private String imageUrl;
 	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	public String getTitle() {
 		return title;
 	}

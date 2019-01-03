@@ -8,10 +8,18 @@ public class LiveDO {
 	private Integer status;
 	private String pushUrl;
 	private String playUrl;
+	private String imageUrl;
 	private String streamId;
 	private Date endTime;
 	private Date gmtCreated;
 	private Date gmtModified;
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	public Integer getId() {
 		return id;
 	}
