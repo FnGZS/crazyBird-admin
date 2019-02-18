@@ -212,6 +212,7 @@ public class VoteProcess {
 		if(param.getId()==null||param.getType()==null) {
 			model.setCode(HttpCodeEnum.ERROR.getCode());
 			model.setMessage("参数不能为空");
+			return model;
 		}
 		PageUtils.resetPageParam(param);
 		VoteActionRecordPO po = new VoteActionRecordPO();

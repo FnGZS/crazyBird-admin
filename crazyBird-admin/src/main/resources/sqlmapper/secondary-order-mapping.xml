@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.admin.dao.secondary.SecondaryDao">
+	<resultMap id="SecondaryGoodsMap"
+		type="com.admin.dao.secondary.dataobject.SecondaryGoodsDO">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="views" property="views" jdbcType="INTEGER" />
+		<result column="goods_title" property="goodsTitle"
+			jdbcType="VARCHAR" />
+		<result column="goods_content" property="goodsContent"
+			jdbcType="VARCHAR" />
+		<result column="goods_num" property="goodsNum"
+			jdbcType="INTEGER" />
+		<result column="goods_img" property="goodsImag"
+			jdbcType="VARCHAR" />
+		<result column="postion" property="postion" jdbcType="VARCHAR" />
+		<result column="goods_type" property="goodsType"
+			jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="goods_way" property="goodsWay"
+			jdbcType="INTEGER" />
+		<result column="trading_way" property="tradingWay"
+			jdbcType="INTEGER" />
+		<result column="telephone" property="telephone"
+			jdbcType="VARCHAR" />	
+		<result column="goods_price" property="price"
+			jdbcType="DECIMAL" />
+		<result column="goods_old_price" property="oldPrice"
+			jdbcType="DECIMAL" />
+		<result column="gmt_created" property="gmtCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="SecondaryTypeMap" type="com.admin.dao.secondary.dataobject.SecondaryTypeDO" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="field" property="field" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="SecondaryRefundMap" type="com.admin.dao.secondary.dataobject.RefundApplyDO" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+     <result column="type" property="type" jdbcType="INTEGER" />
+      <result column="content" property="content" jdbcType="VARCHAR" />
+       <result column="state" property="state" jdbcType="INTEGER" />
+       	<result column="gmt_created" property="gmtCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="SecondaryOrderMap"
+		type="com.admin.dao.secondary.dataobject.SecondaryOrderDO">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="order_id" property="orderId" jdbcType="VARCHAR" />
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="seller_id" property="sellerId"
+			jdbcType="BIGINT" />
+		<result column="seller" property="seller" jdbcType="VARCHAR" />
+		<result column="consignee" property="consignee"
+			jdbcType="VARCHAR" />
+		<result column="order_state" property="orderState" jdbcType="INTEGER" />
+		<result column="logistics" property="logistics" jdbcType="INTEGER" />
+		<result column="receivePhone" property="receivePhone"
+			jdbcType="VARCHAR" />
+		<result column="receiveAddress" property="receiveAddress"
+			jdbcType="VARCHAR" />
+		<result column="gmt_created" property="gmtCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="getRefundApply" parameterType="java.lang.String" resultMap="SecondaryRefundMap">
+	select * from refund_apply where order_id =#{orderId,jdbcType=VARCHAR}
+	</select>
+	  <select id="getSecondaryType" resultMap="SecondaryTypeMap">
+  	select 
+  	*
+  	from secondary_type
+  </select>
+  <select id="getSecondaryWay" resultMap="SecondaryTypeMap">
+  	select 
+  	*
+  	from secondary_way
+  </select>
+  <select id="getSecondaryTradingWay" resultMap="SecondaryTypeMap">
+  	select 
+  	*
+  	from secondary_trading_way
+  </select>
+	<select id="getSecondaryGoodsCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	select count(1) from secondary_goods  
+	<if test="status!=null">
+	where	`status` = #{status,jdbcType=INTEGER}
+	</if>
+	</select>
+	<select id="getSecondaryGoodsById" parameterType="com.admin.dao.secondary.dataobject.SecondaryGoodsSearchDO" resultMap="SecondaryGoodsMap">
+	 select * from secondary_goods where
+	 id=#{id,jdbcType=BIGINT}
+	</select>
+	<select id="getSecondaryGoodsByName" parameterType="com.admin.dao.secondary.dataobject.SecondaryGoodsSearchDO" resultMap="SecondaryGoodsMap">
+	 select * from secondary_goods where
+	goods_title LIKE CONCAT(CONCAT('%',#{goodsName,jdbcType=VARCHAR},'%'))
+	order by gmt_created desc 
+	</select>
+	<select id="getSecondaryGoodsList" parameterType="com.admin.dao.secondary.dataobject.SecondaryGoodsPO" resultMap="SecondaryGoodsMap">
+	select * from secondary_goods 
+	<if test="status!=null">
+	where	`status` = #{status,jdbcType=INTEGER}
+	</if>
+	order by gmt_created desc 
+	limit 
+	#{startPos,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+	<select id ="getSecondaryOrderCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	select count(1) from secondary_order  
+	<if test="status!=null">
+	where	order_state = #{status,jdbcType=INTEGER}
+	</if>
+	</select>
+	<select id="getSecondaryOrder" parameterType="java.lang.String" resultMap="SecondaryOrderMap">
+	select * from secondary_order where order_id=#{orderId,jdbcType=VARCHAR}
+	</select>
+	<select id="getSecondaryOrderList" parameterType="com.admin.dao.secondary.dataobject.SecondaryOrderPO" resultMap="SecondaryOrderMap">
+		select * from secondary_order  
+	<if test="status!=null">
+	where	order_state = #{status,jdbcType=INTEGER}
+	</if>
+	order by gmt_created desc 
+	limit 
+	#{startPos,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+	<insert id="addSecondaryGoods" parameterType="com.admin.dao.secondary.dataobject.SecondaryGoodsDO">
+	insert into secondary_goods
+		(
+		id,
+		user_id,
+		goods_title,
+		goods_content,
+		goods_img,
+		goods_num,
+		postion,
+		views,
+		telephone,
+		goods_type,
+		goods_way,
+		trading_way,
+		`status`,
+		goods_price,
+		goods_old_price,
+		gmt_created,
+		gmt_modified
+		)
+		value(
+		null,
+		#{userId,jdbcType=BIGINT},
+		#{goodsTitle,jdbcType=VARCHAR},
+		#{goodsContent,jdbcType=VARCHAR},
+		#{goodsImag,jdbcType=VARCHAR},
+		null,
+		#{postion,jdbcType=VARCHAR},
+		0,
+		#{telephone,jdbcType=VARCHAR},
+		#{goodsType,jdbcType=INTEGER},
+		#{goodsWay,jdbcType=INTEGER},
+		#{tradingWay,jdbcType=INTEGER},
+		0,
+		#{price,jdbcType=DECIMAL},
+		#{oldPrice,jdbcType=DECIMAL},
+		now(),
+		now()
+		)
+	</insert>
+	<insert id="insertSecondaryGoodsViolation" parameterType="com.admin.dao.secondary.dataobject.SecondaryGoodsViolationDO">
+	insert into secondary_goods_violation
+	(
+		id,
+		goods_id,
+		user_id,
+		notice,
+		is_view,
+		
+	)values
+	(
+	null,
+	#{goodsId,jdbcType=BIGINT},
+	#{userId,jdbcType=BIGINT},
+	#{notice,jdbcType=INTEGER},
+	#{isView,jdbcType=INTEGER}
+	)
+	</insert>
+	<update id="updateSecondaryGoods" parameterType="com.admin.dao.secondary.dataobject.SecondaryGoodsDO">
+	update secondary_goods set
+	<if test="userId!=null">
+	user_id=#{userId,jdbcType=BIGINT},
+	</if>
+	<if test="goodsTitle!=null">
+	goods_title=#{goodsTitle,jdbcType=VARCHAR},
+	</if>
+	<if test="goodsContent!=null">
+	goods_content=	#{goodsContent,jdbcType=VARCHAR},
+	</if>
+	<if test="goodsImag!=null">
+	goods_img=#{goodsImag,jdbcType=VARCHAR},
+	</if>
+	goods_num=null,
+	<if test="postion!=null">
+	postion=#{postion,jdbcType=VARCHAR},
+	</if>
+	<if test="views!=null">
+	views=#{views,jdbcType=INTEGER},
+	</if>
+	<if test="telephone!=null">
+	telephone=#{telephone,jdbcType=VARCHAR},
+	</if>
+	<if test="goodsType!=null">
+	goods_type=#{goodsType,jdbcType=INTEGER},
+	</if>
+	<if test="goodsWay!=null">
+	goods_way=#{goodsWay,jdbcType=INTEGER},
+	</if>
+	<if test="tradingWay!=null">
+	trading_way=#{tradingWay,jdbcType=INTEGER},
+	</if>
+	<if test="status!=null">
+	`status`=#{status,jdbcType=INTEGER},
+	</if>
+	<if test="price!=null">
+	goods_price=#{price,jdbcType=DECIMAL},
+	</if>
+	<if test="oldPrice!=null">
+	goods_old_price=#{oldPrice,jdbcType=DECIMAL},
+	</if>
+	gmt_modified=now()
+	where id=#{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateSecondaryOrder" parameterType="com.admin.dao.secondary.dataobject.SecondaryOrderDO">
+	update secondary_order set
+	<if test="orderId!=null">
+	order_id=#{orderId,jdbcType=VARCHAR},
+	</if>
+	<if test="goodsId!=null">
+	goods_id=#{goodsId,jdbcType=BIGINT},
+	</if>
+	<if test="userId!=null">
+	user_id=#{userId,jdbcType=BIGINT},
+	</if>
+	<if test="price!=null">
+	price=#{price,jdbcType=DECIMAL},
+	</if>
+	<if test="orderState!=null">
+	order_state=#{orderState,jdbcType=INTEGER},
+	</if>
+	<if test="logistics!=null">
+	logistics=#{logistics,jdbcType=INTEGER},
+	</if>
+	<if test="sellerId!=null">
+	seller_id=#{sellerId,jdbcType=BIGINT},
+	</if>
+	<if test="seller!=null">
+	seller=#{seller,jdbcType=VARCHAR},
+	</if>
+	<if test="consignee!=null">
+	consignee=#{consignee,jdbcType=VARCHAR},
+	</if>
+	<if test="receivePhone!=null">
+	receivePhone=#{receivePhone,jdbcType=VARCHAR},
+	</if>
+	<if test="receiveAddress!=null">
+	receiveAddress=	#{receiveAddress,jdbcType=VARCHAR},
+	</if>
+	gmt_modified=now()
+	where id=#{id,jdbcType=BIGINT}
+	</update>
+	<delete id="deleteSecondaryGoods" parameterType="java.lang.Long">
+	delete from secondary_goods where id=#{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteSecondaryOrder" parameterType="java.lang.String">
+	delete from secondary_order where order_id=#{orderId,jdbcType=VARCHAR}
+	</delete>
+	
+</mapper>
